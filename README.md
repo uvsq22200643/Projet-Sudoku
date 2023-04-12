@@ -240,3 +240,37 @@ def boutonfermer():
    
 
 fenetre.mainloop()
+
+ 
+
+def fermer_fenetre():
+
+    fenetre.destroy()
+
+ 
+
+bouton=tk.Button(command=fermer_fenetre,bg="orange red",text="tu peux quitter la partie",font=(12))
+
+bouton.grid(row=1,column=1)
+
+def redemarer():
+
+    fenetre.mainloop()
+
+ 
+
+bouton2=tk.Button(command=redemarer, bg='Slateblue3',text="tu peut refaire une partie",font=(12))
+
+bouton2.grid(row=2,column=1)
+
+ 
+
+def sauvegarder():
+
+    print("3")
+
+   
+
+ 
+
+bouton3=tk.Button(command=sauvegarder, bg="hot pink",text="sauvegarde ta partie")
