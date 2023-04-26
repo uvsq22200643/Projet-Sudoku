@@ -1,6 +1,6 @@
 from random import randint, choice
 import tkinter as tk
-
+valeurspossibles=range(1,10)
 def creer_tableau_plein(lignes,colonnes):
     """Crée un tableau de valeurs comprises entre 1 et 9
     Pour chaque ligne dans un tableau déjà rempli, on prend une série de 3 lignes aléatoirement et on l'ajoute à un tableau, afin d'ajouter un peu de hasard dans sa structure"""
@@ -81,9 +81,9 @@ def afficher_tableau_tkinter(tableau,taille):#qui affiche un canvas avec une gri
     global tableau_texte
     for i in range(len(tableau)):
         for j in range(len(tableau[i])):
-            rectangle = canvas.create_rectangle(i*taille,j*taille,i*taille+taille,j*taille+taille,outline = "black")
+            rectangle = canvas.create_rectangle(i*taille,j*taille,i*taille+taille,j*taille+taille,outline = "black", width=3)
             texte = str(tableau[i][j])
-            if texte=="0":
+            if texte=="0" or int(texte) not in valeurspossibles:
                 texte = " "
             texte_item=canvas.create_text(i*taille + taille//2, j*taille + taille//2, text=texte, fill="black", font=('Helvetica 15 bold'))
             tableau_texte[i][j]=texte_item
@@ -92,6 +92,12 @@ def update_texte():
     global POSITION_SOURIS
     item = canvas.find_closest(*POSITION_SOURIS)[0]
     texte=my_entry.get()
+    if int(texte) not in valeurspossibles:
+        Label["text"] = "ne respecte pas les contraite du jeux"
+        return 
+    sudoku[POSITION_SOURIS[0]//size][POSITION_SOURIS[1]//size] = int(texte)
+    if check_sudoku(sudoku):
+        Label["text"]="Vous avez gagné !"
     print(texte)
     print(item)
     canvas.itemconfigure(item,text=texte)
@@ -145,6 +151,8 @@ bouton2.grid(row=2,column=1)
 def sauvegarder():
     print("3")
     
+Label=tk.Label(fenetre, text="")
+Label.grid(row=0, column=1)
 
 bouton3=tk.Button(command=sauvegarder, bg="hot pink",text="sauvegarder la partie",font=(12))
 bouton3.grid(row=3,column=1)
@@ -165,7 +173,6 @@ fenetre.mainloop()
 #Il reste à faire un code pour modifier les valeurs tu tableau, code pour démarer la partie et pour la sauvegarde la partie
 #un code pour dire s'il y a des erreurs et un bouton pour relancer la partie 
 #faire séparation de la grille
-#• Permettre à l’usager de sélectionner une case et d’entrer un chiffre de 1 à 9 dans cette case.
 #• Notifier l’utilisateur si le chiffre inséré ne respecte pas les contraintes du jeu.
 # Proposer une panoplie de puzzles générés auparavant.
 # Mettre en évidence les erreurs en utilisant un code couleur (du rouge par exemple) pour montrer lacontrainte qui n’est pas respectée.
