@@ -61,11 +61,12 @@ def sommes_carres(carre):
     sommes = [sum(carre[i]) for i in range(len(carre))]
     somme = sum(sommes)
 
-def sudoku_ok(line):
+def sudoku_ok(line): # fonction prise sur inetrenet 
     """Vérifie si une ligne d'un tableau est correcte"""
     return (len(line) == 9 and sum(line) == sum(set(line)))
 
-def check_sudoku(grid):# qui prend un tableau et qui vérifie s'il est correctement rempli (en utilisant les fonctions recupere_carre,somme_carre et sudoku_ok)
+def check_sudoku(grid):# fonctions prise sur inetrent 
+    # qui prend un tableau et qui vérifie s'il est correctement rempli (en utilisant les fonctions recupere_carre,somme_carre et sudoku_ok)
     """Vérifie si un tableau répond bien aux règles de complétion d'un sudoku"""
     bad_rows = [row for row in grid if not sudoku_ok(row)]
     grid = list(zip(*grid))
@@ -158,7 +159,7 @@ Label.grid(row=0, column=1)
 bouton3=tk.Button(command=sauvegarder, bg="hot pink",text="sauvegarder la partie",font=(12))
 bouton3.grid(row=3,column=1)
 
-my_entry = tk.Entry(fenetre)
+my_entry = tk.Entry(fenetre) # fonctions prise sur internet 
 my_entry.grid()
 # entry = tk.Entry(fenetre,
 #                  font='Arial 60 bold',
@@ -171,46 +172,11 @@ my_entry.focus_set()
     
 fenetre.mainloop()
 
-#Il reste à faire un code pour modifier les valeurs tu tableau, code pour démarer la partie et pour la sauvegarde la partie
-#un code pour dire s'il y a des erreurs et un bouton pour relancer la partie 
-#faire séparation de la grille
-#• Notifier l’utilisateur si le chiffre inséré ne respecte pas les contraintes du jeu.
+#CE QUI NOUS RESTE A FAIRE:
+
+#Il reste à faire un code pour modifier les valeurs du tableau et pour la sauvegarde la partie
 # Proposer une panoplie de puzzles générés auparavant.
-# Mettre en évidence les erreurs en utilisant un code couleur (du rouge par exemple) pour montrer lacontrainte qui n’est pas respectée.
-# Pouvoir annuler une partie de sudoku.
-#Effacer des chiffres déjà entrés au niveau des cases.
 #Sauvegarder l’état de jeu d’une grille et refaire une grille déjà résolue si l’usager le souhaite.
 # Proposer une aide, par exemple afficher toutes les cases contenant un chiffre donné.
 # Afficher et sauvegarder le temps nécessaire pour remplir la grille ainsi que le nombre d’erreurs commises.
 # Afficher les cases sur lesquelles portent les contraintes (si l’usager le souhaite).
-
-# Pour tester commits
-my_entry = tk.Entry(fenetre)
-my_entry.grid()
-# entry = tk.Entry(fenetre,
-#                  font='Arial 60 bold',
-#                  width='5',
-#                  bg='lavender',
-#                  insertofftime=500,
-#                  relief=FLAT)
-my_entry.grid(row=2, column=2)
-my_entry.focus_set()
-    
-fenetre.mainloop()
-
-#Il reste à faire un code pour modifier les valeurs tu tableau, code pour démarer la partie et pour la sauvegarde la partie
-#un code pour dire s'il y a des erreurs et un bouton pour relancer la partie 
-#faire séparation de la grille
-#• Permettre à l’usager de sélectionner une case et d’entrer un chiffre de 1 à 9 dans cette case.
-#• Notifier l’utilisateur si le chiffre inséré ne respecte pas les contraintes du jeu.
-# Proposer une panoplie de puzzles générés auparavant.
-# Mettre en évidence les erreurs en utilisant un code couleur (du rouge par exemple) pour montrer lacontrainte qui n’est pas respectée.
-# Pouvoir annuler une partie de sudoku.
-#Effacer des chiffres déjà entrés au niveau des cases.
-#Sauvegarder l’état de jeu d’une grille et refaire une grille déjà résolue si l’usager le souhaite.
-# Proposer une aide, par exemple afficher toutes les cases contenant un chiffre donné.
-# Afficher et sauvegarder le temps nécessaire pour remplir la grille ainsi que le nombre d’erreurs commises.
-# Afficher les cases sur lesquelles portent les contraintes (si l’usager le souhaite).
-
-# Pour tester commits
-
