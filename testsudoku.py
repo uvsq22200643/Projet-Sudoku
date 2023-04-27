@@ -154,7 +154,8 @@ bouton2=tk.Button(command=redemarer, bg='Slateblue3',text="tu peut refaire une p
 bouton2.grid(row=2,column=1)
 
 def sauvegarder():
-    print("3")
+    filename = filedialog.asksaveasfilename(defaultextension=".eps")
+    canvas.postscript(file=filename, colormode='color')
     
 Label=tk.Label(fenetre, text="")
 Label.grid(row=0, column=1)
