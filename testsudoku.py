@@ -3,6 +3,7 @@ from random import randint, choice
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import simpledialog
+import webbrowser
 valeurspossibles=range(1,10)
 
 
@@ -152,8 +153,9 @@ bouton_texte.grid(row=4,column=2)
 
 bouton=tk.Button(command=fermer_fenetre,bg="orange red",text="tu peux quitter la partie",font=(12))
 bouton.grid(row=1,column=1)
+
 def redemarer():
-    fenetre.mainloop()
+    bouton2.config(text="commence ta nouvelle partie :)")
 
 bouton2=tk.Button(command=redemarer, bg='Slateblue3',text="tu peut refaire une partie",font=(12))
 bouton2.grid(row=2,column=1)
@@ -161,6 +163,10 @@ bouton2.grid(row=2,column=1)
 def sauvegarder():
     filename = filedialog.asksaveasfilename(defaultextension=".eps")
     canvas.postscript(file=filename, colormode='color')
+
+def aide():
+    webbrowser.open("https://www.assistant-sudoku.com/")
+    #bouton4.config(text="copie colle ce lien : https://www.assistant-sudoku.com/")
     
 Label=tk.Label(fenetre, text="")
 Label.grid(row=0, column=1)
@@ -168,6 +174,8 @@ Label.grid(row=0, column=1)
 bouton3=tk.Button(command=sauvegarder, bg="hot pink",text="sauvegarder la partie",font=(12))
 bouton3.grid(row=3,column=1)
 
+bouton4=tk.Button(command=aide,bg="pink",text="help",font=9)
+bouton4.grid(row=4,column=1)
 my_entry = tk.Entry(fenetre) # fonctions prise sur internet 
 my_entry.grid()
 # entry = tk.Entry(fenetre,
@@ -183,7 +191,7 @@ fenetre.mainloop()
 
 #CE QUI NOUS RESTE A FAIRE:
 
-#Il reste à faire un code pour modifier les valeurs tu tableau 
+#Il reste à faire un code pour modifier les valeurs tu tableau et pour la sauvegarde la partie
 # Proposer une panoplie de puzzles générés auparavant.
 #Sauvegarder l’état de jeu d’une grille et refaire une grille déjà résolue si l’usager le souhaite.
 # Proposer une aide, par exemple afficher toutes les cases contenant un chiffre donné.
