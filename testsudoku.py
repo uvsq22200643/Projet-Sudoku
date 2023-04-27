@@ -18,9 +18,9 @@ def creer_tableau_plein(lignes,colonnes):
                 [9,1,2,3,4,5,6,7,8]]
 #renvoie un tableau de Sudoku
 
-    for _ in range(0,lignes,3):
-        c = choice(list_of_choices)
-        list_of_choices.remove(c)
+    for _ in range(0,lignes,3):#de 0 à 9 par saut de 3
+        c = choice(list_of_choices)#permet de choisir au hasard l'une des trois valeur de la liste associe a la variable list_of_choices
+        list_of_choices.remove(c)#on va supprimer lelement selectionnner au hasard
         tableau.append(full_tab[c])
         tableau.append(full_tab[c+1])
         tableau.append(full_tab[c+2])
@@ -39,7 +39,7 @@ def afficher_tableau(tableau):#affiche le tableau dans la console
 def modifier_valeur_tableau(tableau,pos,v):#qui prend un tableau, un tuple (x,y) et une valeur qui remplace la valeur à la position tableau [x][y] par v (placer les chiffres du joueur ou à les enlever )    """Modifie la valeur présente aux coordonnées pos dans un tableau (tableau[x][y]) par la valeur v"""
     tableau[pos[0]][pos[1]] = v
 
-def recuperer_carre(tableau):
+def recuperer_carre(tableau):#permet la division de la grille en 9 carrés 3*3
     """Crée une liste contenant tous les sous-tableaux de taille 3x3 dans un tableau"""
     chunks = [tableau[x:x+3] for x in range(0, len(tableau), 3)]
     squares = []
@@ -61,21 +61,22 @@ def sommes_carres(carre):
     sommes = [sum(carre[i]) for i in range(len(carre))]
     somme = sum(sommes)
 
-def sudoku_ok(line): # fonction prise sur inetrenet 
-    """Vérifie si une ligne d'un tableau est correcte"""
+def sudoku_ok(line): # fonction prise sur internet 
+    """Vérifie si une ligne d'un tableau est correcte"""#en reg
     return (len(line) == 9 and sum(line) == sum(set(line)))
 
-def check_sudoku(grid):# fonctions prise sur inetrent 
+def check_sudoku(grid):# fonctions prise sur internet prend en paramètre toute la grille du sudoku
     # qui prend un tableau et qui vérifie s'il est correctement rempli (en utilisant les fonctions recupere_carre,somme_carre et sudoku_ok)
     """Vérifie si un tableau répond bien aux règles de complétion d'un sudoku"""
-    bad_rows = [row for row in grid if not sudoku_ok(row)]
-    grid = list(zip(*grid))
+    bad_rows = [row for row in grid if not sudoku_ok(row)]#stocke les lignes qui se répètent
+    grid = list(zip(*grid))#permet d'inverser les colonnes et les lignes de la grille
     bad_cols = [col for col in grid if not sudoku_ok(col)]
-    carres = recuperer_carre(grid)
+    carres = recuperer_carre(grid)#divise la grille en 9 carrés
     bad_squares = False
     for carre in carres:
         bad_squares = bad_squares or sommes_carres(carre) == sum(range(9+1))
     return not (bad_rows or bad_cols or bad_squares)
+ #la fonction return True ou false en fonction de si la grille est correctement remplie ou non 
 
 def afficher_tableau_tkinter(tableau,taille):#qui affiche un canvas avec une grille
     """Affiche une fenêtre ainsi qu'un canvas dont les cases dessinées correspondent à un tableau et sont de taille taille"""
@@ -90,13 +91,15 @@ def afficher_tableau_tkinter(tableau,taille):#qui affiche un canvas avec une gri
             texte_item=canvas.create_text(i*taille + taille//2, j*taille + taille//2, text=texte, fill="black", font=('Helvetica 15 bold'))
             tableau_texte[i][j]=texte_item
 
-def update_texte():
+def update_texte():#permet dactualiser le tableau avec les chiffres rentrer par le joueur
     global POSITION_SOURIS
-    item = canvas.find_closest(*POSITION_SOURIS)[0]
-    texte=my_entry.get()
+    item = canvas.find_closest(*POSITION_SOURIS)[0]#permet de rouver la case vide la plus proche du click de la souris
+    texte=my_entry.get()#l'espace qui nous permet decrire le chiffre qui apparaitra sur la cas 
     if int(texte) not in valeurspossibles:
-        Label["text"] = "ne respecte pas les contraite du jeux"
+        Label["text"] = "CHOISIS UN CHIFFRE ENTRE 1 ET 9 :("
         return 
+    else:
+        Label["text"]="TON CHIFFRE EST VALABLE :D"
     sudoku[POSITION_SOURIS[0]//size][POSITION_SOURIS[1]//size] = int(texte)
     if check_sudoku(sudoku):
         Label["text"]="Vous avez gagné !"
@@ -174,7 +177,7 @@ fenetre.mainloop()
 
 #CE QUI NOUS RESTE A FAIRE:
 
-#Il reste à faire un code pour modifier les valeurs du tableau et pour la sauvegarde la partie
+#Il reste à faire un code pour modifier les valeurs tu tableau et pour la sauvegarde la partie
 # Proposer une panoplie de puzzles générés auparavant.
 #Sauvegarder l’état de jeu d’une grille et refaire une grille déjà résolue si l’usager le souhaite.
 # Proposer une aide, par exemple afficher toutes les cases contenant un chiffre donné.
