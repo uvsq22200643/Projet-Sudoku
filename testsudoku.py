@@ -25,7 +25,7 @@ def creer_tableau_plein(lignes,colonnes):
 #renvoie un tableau de Sudoku
 
     for _ in range(0,lignes,3):#de 0 à 9 par saut de 3
-        c = choice(list_of_choices)#permet de choisir au hasard l'une des trois valeur de la liste associe a la variable list_of_choices
+        c = choice(list_of_choices)#permet de choisir au hasard l'une des trois valeur de la liste associer a la variable list_of_choices
         list_of_choices.remove(c)#on va supprimer lelement selectionnner au hasard
         tableau.append(full_tab[c])
         tableau.append(full_tab[c+1])
@@ -45,7 +45,7 @@ def afficher_tableau(tableau):#affiche le tableau dans la console
 def modifier_valeur_tableau(tableau,pos,v):#qui prend un tableau, un tuple (x,y) et une valeur qui remplace la valeur à la position tableau [x][y] par v (placer les chiffres du joueur ou à les enlever )    """Modifie la valeur présente aux coordonnées pos dans un tableau (tableau[x][y]) par la valeur v"""
     tableau[pos[0]][pos[1]] = v
 
-def recuperer_carre(tableau):#permet la division de la grille en 9 carrés 3*3
+def recuperer_carre(tableau):#permet la division de la grille en 9*9 et carrés 3*3
     """Crée une liste contenant tous les sous-tableaux de taille 3x3 dans un tableau"""
     chunks = [tableau[x:x+3] for x in range(0, len(tableau), 3)]
     squares = []
@@ -68,7 +68,7 @@ def sommes_carres(carre):
     somme = sum(sommes)
 
 def sudoku_ok(line): # fonction prise sur internet 
-    """Vérifie si une ligne d'un tableau est correcte"""#en reg
+    """Vérifie si une ligne d'un tableau est correcte"""#en reg, elle verifie si les lignes sont correcte avec tout les chiffres et donc qu'il n'y a pas de répetion 
     return (len(line) == 9 and sum(line) == sum(set(line)))
 
 def check_sudoku(grid):# fonctions prise sur internet prend en paramètre toute la grille du sudoku
@@ -100,9 +100,9 @@ def afficher_tableau_tkinter(tableau,taille):#qui affiche un canvas avec une gri
 def update_texte():#permet dactualiser le tableau avec les chiffres rentrer par le joueur
     global POSITION_SOURIS
     item = canvas.find_closest(*POSITION_SOURIS)[0]#permet de rouver la case vide la plus proche du click de la souris
-    texte=my_entry.get()#l'espace qui nous permet decrire le chiffre qui apparaitra sur la cas 
+    texte=my_entry.get()#l'espace qui nous permet decrire le chiffre qui apparaitra sur la case
     if int(texte) not in valeurspossibles:
-        Label["text"] = "CHOISIS UN CHIFFRE ENTRE 1 ET 9 :("
+        Label["text"] = "CHOISIS UN CHIFFRE ENTRE 1 ET 9 :(, tu ne respecte pas les contraintes du jeux"
         return 
     else:
         Label["text"]="TON CHIFFRE EST VALABLE :D"
@@ -111,7 +111,7 @@ def update_texte():#permet dactualiser le tableau avec les chiffres rentrer par 
         Label["text"]="Vous avez gagné !"
     print(texte)
     print(item)
-    canvas.itemconfigure(item,text=texte)
+    canvas.itemconfigure(item,text=texte)# permet de dire si la personne a fait une erreur en saisissant le mauvais chiffre et affiche si l'on a réussi
 
 
 
@@ -126,9 +126,9 @@ def get_mouse_pos(event): #qui recupere la position de la souris quand tu clique
     
 
 size = 50
-nb_cases_vides = 60
+nb_cases_vides = 60# le nombre de cases remplis et le reste des cases son vide pour que l'utilisateur puisse les remplires
 POSITION_SOURIS = (0,0)
-tableau_texte=[[0]*9 for _ in range(9)]#creer un tableau 9*9 contenant des 0
+tableau_texte=[[0]*9 for _ in range(9)]#creer un tableau 9*9 contenant des 0 (0=cases vides)
 sudoku = creer_tableau_plein(9, 9)
 while not check_sudoku(sudoku):
     sudoku = creer_tableau_plein(9, 9)
@@ -151,16 +151,16 @@ def fermer_fenetre():
 bouton_texte=tk.Button(command=update_texte,text="écrire une valeur")
 bouton_texte.grid(row=4,column=2)    
 
-bouton=tk.Button(command=fermer_fenetre,bg="orange red",text="tu peux quitter la partie",font=(12))
+bouton=tk.Button(command=fermer_fenetre,bg="orange red",text="tu peux quitter la partie",font=(12))#bouton pour quiter la partie 
 bouton.grid(row=1,column=1)
 
 def redemarer():
     bouton2.config(text="commence ta nouvelle partie :)")
 
-bouton2=tk.Button(command=redemarer, bg='Slateblue3',text="tu peut refaire une partie",font=(12))
+bouton2=tk.Button(command=redemarer, bg='Slateblue3',text="tu peut refaire une partie",font=(12))# bouton pour refaire une partie 
 bouton2.grid(row=2,column=1)
 
-def sauvegarder():
+def sauvegarder():#fonction qui permet de sauveagredr avec la fonction filedialogue qui permet de sauvegarder des fichiers
     filename = filedialog.asksaveasfilename(defaultextension=".eps")
     canvas.postscript(file=filename, colormode='color')
 
@@ -171,11 +171,12 @@ def aide():
 Label=tk.Label(fenetre, text="")
 Label.grid(row=0, column=1)
 
-bouton3=tk.Button(command=sauvegarder, bg="hot pink",text="sauvegarder la partie",font=(12))
+bouton3=tk.Button(command=sauvegarder, bg="hot pink",text="sauvegarder la partie",font=(12))# bouton sauvegarder la partie
 bouton3.grid(row=3,column=1)
 
-bouton4=tk.Button(command=aide,bg="pink",text="help",font=9)
+bouton4=tk.Button(command=aide,bg="pink",text="help",font=9)# bouton help
 bouton4.grid(row=4,column=1)
+
 my_entry = tk.Entry(fenetre) # fonctions prise sur internet 
 my_entry.grid()
 # entry = tk.Entry(fenetre,
