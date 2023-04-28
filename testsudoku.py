@@ -106,6 +106,7 @@ def update_texte():#permet dactualiser le tableau avec les chiffres rentrer par 
         return 
     else:
         Label["text"]="TON CHIFFRE EST VALABLE :D"
+        
     sudoku[POSITION_SOURIS[0]//size][POSITION_SOURIS[1]//size] = int(texte)
     if check_sudoku(sudoku):
         Label["text"]="Vous avez gagné !"
@@ -189,12 +190,3 @@ my_entry.grid(row=2, column=2)
 my_entry.focus_set()
     
 fenetre.mainloop()
-
-#CE QUI NOUS RESTE A FAIRE:
-
-#Il reste à faire un code pour modifier les valeurs tu tableau et pour la sauvegarde la partie
-# Proposer une panoplie de puzzles générés auparavant.
-#Sauvegarder l’état de jeu d’une grille et refaire une grille déjà résolue si l’usager le souhaite.
-# Proposer une aide, par exemple afficher toutes les cases contenant un chiffre donné.
-# Afficher et sauvegarder le temps nécessaire pour remplir la grille ainsi que le nombre d’erreurs commises.
-# Afficher les cases sur lesquelles portent les contraintes (si l’usager le souhaite).
