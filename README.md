@@ -8,7 +8,7 @@ Install my-project with npm
   cd my-project
 ```
 https://github.com/uvsq22205739/Projet-Sudoku 
-# Project Sudoku
+# Projet Sudoku
 
 TD°2 Biologie-Informatique
 Kelly MBEMBA
