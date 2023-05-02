@@ -149,7 +149,7 @@ def case_est_vide():
 def fermer_fenetre():
     fenetre.destroy()
 
-bouton_texte=tk.Button(command=update_texte,text="écrire une valeur")
+bouton_texte=tk.Button(command=update_texte,text="clique ici pour valider ta valeur")
 bouton_texte.grid(row=4,column=2)    
 
 bouton=tk.Button(command=fermer_fenetre,bg="orange red",text="tu peux quitter la partie",font=(12))#bouton pour quiter la partie 
